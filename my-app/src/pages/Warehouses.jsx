@@ -24,8 +24,7 @@ const Warehouses = () => {
 
     if (editingId) {
       await axios.put(
-        `http://localhost:5000/api/warehouse2/${editingId}`,
-        form
+`https://monatour-3.onrender.com/api/warehouse2/${editingId}`
       );
     } else {
 axios.post("https://monatour-3.onrender.com/api/warehouse2", form)
