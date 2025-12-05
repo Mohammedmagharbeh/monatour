@@ -8,6 +8,13 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-gray-100">
+
+        <header className="bg-white shadow p-4 sm:p-6 text-center">
+          <h1 className="text-2xl sm:text-3xl font-bold text-blue-800">
+            مؤسسة الناطور للمواد الصحية
+          </h1>
+        </header>
+
         {/* Navbar */}
         <nav className="bg-blue-700 text-white p-4 flex justify-around">
                     <Link to="/shop" className="hover:text-yellow-300 font-semibold">جرد المحل</Link>
@@ -19,11 +26,13 @@ function App() {
 
         <div className="p-6">
           <Routes>
-            <Route path="/warehouse" element={<Warehouse />} />
-            <Route path="/" element={<Shop />} />
-            <Route path="/debt" element={<Debt />} />
-            <Route path="/warehouses" element={<Warehouses />} />
-          </Routes>
+  <Route path="/" element={<Shop />} />
+  <Route path="/shop" element={<Shop />} />
+  <Route path="/warehouse" element={<Warehouse />} />
+  <Route path="/warehouses" element={<Warehouses />} />
+  <Route path="/debt" element={<Debt />} />
+</Routes>
+
         </div>
       </div>
     </Router>
