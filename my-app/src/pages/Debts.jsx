@@ -148,7 +148,7 @@ import axios from "axios";
 
 const Debt = () => {
   const [debts, setDebts] = useState([]);
-  const [form, setForm] = useState({ name: "", type: "credit", amount: 0, date: "" });
+  const [form, setForm] = useState({ name: "", type: "", amount: "", date: "" });
   const [editingId, setEditingId] = useState(null);
 
   const fetchDebts = async () => {
