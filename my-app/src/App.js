@@ -20,7 +20,7 @@ function App() {
         <div className="p-6">
           <Routes>
             <Route path="/warehouse" element={<Warehouse />} />
-            <Route path="/shop" element={<Shop />} />
+            <Route path="/" element={<Shop />} />
             <Route path="/debt" element={<Debt />} />
             <Route path="/warehouses" element={<Warehouses />} />
           </Routes>
