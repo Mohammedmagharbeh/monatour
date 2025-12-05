@@ -23,7 +23,6 @@ function App() {
             <Route path="/shop" element={<Shop />} />
             <Route path="/debt" element={<Debt />} />
             <Route path="/warehouses" element={<Warehouses />} />
-            <Route path="*" element={<h2 className="text-xl text-red-600">Page Not Found</h2>} />
           </Routes>
         </div>
       </div>
