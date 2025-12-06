@@ -36,7 +36,7 @@ const shopRoutes = require("./routes/shopRoutes");
 const debtRoutes = require("./routes/debtRoutes");
 
 // ✅ الراوت الجديد
-const authRoutes = require("./routes/authRoutes");
+const authRoutes = require("./routes/userRoutes");
 
 const app = express();
 
