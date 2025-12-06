@@ -240,6 +240,75 @@
 // export default App;
 
 // App.js
+
+
+// import React, { useState } from "react";
+// import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+
+// import Login from "./pages/log";
+// import Creditors from "./pages/Creditors";
+// import Debtors from "./pages/Debtors";
+// import Shop from "./pages/Shop";
+// import Warehouse from "./pages/Warehouse";
+// import Warehouses from "./pages/Warehouses";
+// import Navigation from "./pages/Navigation";
+
+// // حماية الصفحات حسب التوكن
+// const PrivateRoute = ({ children }) => {
+//   const token = sessionStorage.getItem("jwt");
+//   return token ? children : <Navigate to="/" />;
+// };
+
+// function App() {
+//   // التحقق من التوكن مباشرة عند التحميل
+//   const token = sessionStorage.getItem("jwt");
+//   const [isLoggedIn, setIsLoggedIn] = useState(!!token);
+
+//   const Logout = () => {
+//     sessionStorage.removeItem("jwt");
+//     sessionStorage.removeItem("username");
+//     setIsLoggedIn(false);
+//   };
+
+//   return (
+//     <Router>
+//       <div className="min-h-screen bg-gray-100">
+//         {/* العنوان */}
+//         <header className="bg-white shadow p-4 sm:p-6 text-center">
+//           <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-800">
+//             مؤسسة الناطور للمواد الصحية
+//           </h1>
+//         </header>
+
+//         {/* Navbar يظهر فقط بعد تسجيل الدخول */}
+//         <Navigation isLoggedIn={isLoggedIn} Logout={Logout} />
+
+//         <div className="p-4 sm:p-6">
+//           <Routes>
+//             {/* الصفحة الرئيسية = تسجيل الدخول */}
+//             <Route
+//               path="/"
+//               element={
+//                 isLoggedIn
+//                   ? <Navigate to="/creditors" />
+//                   : <Login setIsLoggedIn={setIsLoggedIn} />
+//               }
+//             />
+
+//             {/* الصفحات المحمية */}
+//             <Route path="/creditors" element={<PrivateRoute><Creditors /></PrivateRoute>} />
+//             <Route path="/debtors" element={<PrivateRoute><Debtors /></PrivateRoute>} />
+//             <Route path="/shop" element={<PrivateRoute><Shop /></PrivateRoute>} />
+//             <Route path="/warehouse" element={<PrivateRoute><Warehouse /></PrivateRoute>} />
+//             <Route path="/warehouses" element={<PrivateRoute><Warehouses /></PrivateRoute>} />
+//           </Routes>
+//         </div>
+//       </div>
+//     </Router>
+//   );
+// }
+
+// export default App;
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
@@ -258,7 +327,6 @@ const PrivateRoute = ({ children }) => {
 };
 
 function App() {
-  // التحقق من التوكن مباشرة عند التحميل
   const token = sessionStorage.getItem("jwt");
   const [isLoggedIn, setIsLoggedIn] = useState(!!token);
 
@@ -278,22 +346,21 @@ function App() {
           </h1>
         </header>
 
-        {/* Navbar يظهر فقط بعد تسجيل الدخول */}
+        {/* Navbar / Dropdown */}
         <Navigation isLoggedIn={isLoggedIn} Logout={Logout} />
 
         <div className="p-4 sm:p-6">
           <Routes>
-            {/* الصفحة الرئيسية = تسجيل الدخول */}
             <Route
               path="/"
               element={
-                isLoggedIn
-                  ? <Navigate to="/creditors" />
-                  : <Login setIsLoggedIn={setIsLoggedIn} />
+                isLoggedIn ? (
+                  <Navigate to="/creditors" />
+                ) : (
+                  <Login setIsLoggedIn={setIsLoggedIn} />
+                )
               }
             />
-
-            {/* الصفحات المحمية */}
             <Route path="/creditors" element={<PrivateRoute><Creditors /></PrivateRoute>} />
             <Route path="/debtors" element={<PrivateRoute><Debtors /></PrivateRoute>} />
             <Route path="/shop" element={<PrivateRoute><Shop /></PrivateRoute>} />
