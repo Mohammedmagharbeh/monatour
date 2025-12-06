@@ -67,7 +67,6 @@
 // };
 
 // export default Login;
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -80,17 +79,23 @@ const Login = ({ setIsLoggedIn }) => {
   const LoginHandler = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://monatour-3.onrender.com/api/login", { username, password });
+      // ✅ رابط الباك اند على Render
+      const res = await axios.post(
+        "https://monatour-3.onrender.com/api/login",
+        { username, password }
+      );
+
       if (res.data.token) {
         sessionStorage.setItem("jwt", res.data.token);
         sessionStorage.setItem("username", username);
         setIsLoggedIn(true);
-        navigate("/shop");
+        navigate("/creditors"); // صفحة بعد تسجيل الدخول
       } else {
         alert("❌ لم يتم استلام التوكن من السيرفر");
       }
     } catch (error) {
       alert("❌ بيانات تسجيل الدخول غير صحيحة");
+      console.error(error);
     }
   };
 
@@ -115,7 +120,10 @@ const Login = ({ setIsLoggedIn }) => {
             required
             className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <button type="submit" className="w-full bg-blue-700 hover:bg-blue-800 text-white py-3 rounded-lg font-bold transition">
+          <button
+            type="submit"
+            className="w-full bg-blue-700 hover:bg-blue-800 text-white py-3 rounded-lg font-bold transition"
+          >
             تسجيل الدخول
           </button>
         </form>
