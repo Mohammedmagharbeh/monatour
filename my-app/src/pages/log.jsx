@@ -80,9 +80,8 @@ const Login = ({ setIsLoggedIn }) => {
     e.preventDefault();
     try {
       // ✅ رابط الباك اند على Render
-      const res = await axios.post(
-        "https://monatour-3.onrender.com/api/login",
-        { username, password }
+      const res = await axios.post("https://monatour-3.onrender.com/api/login", { username, password });
+        console.log("Response from server:", res.data
       );
 
       if (res.data.token) {
