@@ -10,7 +10,8 @@ const Login = () => {
   const LoginHandler = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://monatour-3.onrender.com/api/login", {
+      const res = await axios.post("https://monatour-3.onrender.com/auth/login",
+{
         username,
         password,
       });
