@@ -167,15 +167,15 @@ const Debtors = () => {
                   <td className="p-4 border-t border-gray-200 flex gap-2">
                     <button
                       onClick={() => handleEdit(d)}
-                      className="bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-semibold px-3 py-2 rounded-lg transition"
+    className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-semibold px-4 py-3 rounded-lg transition text-sm sm:text-base"
                     >
-                      تعديل
+                     ✏️ تعديل
                     </button>
                     <button
                       onClick={() => handleDelete(d._id)}
-                      className="bg-red-500 hover:bg-red-600 text-white font-semibold px-3 py-2 rounded-lg transition"
+    className="flex-1 bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-3 rounded-lg transition text-sm sm:text-base"
                     >
-                      حذف
+ 🗑️                     حذف
                     </button>
                   </td>
                 </tr>
@@ -185,40 +185,45 @@ const Debtors = () => {
         </div>
 
         {/* Mobile card view */}
-        <div className="sm:hidden space-y-4">
-          {debtors.map((d) => (
-            <div
-              key={d._id}
-              className="bg-white rounded-lg shadow-md p-4 border-l-4 border-blue-500"
-            >
-              <div className="flex justify-between items-start mb-3">
-                <div>
-                  <p className="font-bold text-gray-800 text-lg">{d.name}</p>
-                  <p className="text-sm text-gray-500 mt-1">
-                    {new Date(d.date).toLocaleDateString("en-GB")}
-                  </p>
-                </div>
-                <p className="text-red-600 font-bold text-lg">
-                  {Number(d.amount).toLocaleString()} دينار
-                </p>
-              </div>
-              <div className="flex gap-2 mt-4">
-                <button
-                  onClick={() => handleEdit(d)}
-                  className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-semibold py-2 rounded-lg transition"
-                >
-                  تعديل
-                </button>
-                <button
-                  onClick={() => handleDelete(d._id)}
-                  className="flex-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-lg transition"
-                >
-                  حذف
-                </button>
-              </div>
-            </div>
-          ))}
+        {/* Mobile card view */}
+<div className="sm:hidden space-y-4">
+  {debtors.map((d) => (
+    <div
+      key={d._id}
+      className="bg-white rounded-lg shadow-md p-4 border-r-4 border-blue-500"
+    >
+      <div className="mb-3">
+        <p className="text-gray-600 text-sm">الاسم</p>
+        <p className="text-gray-800 font-bold text-lg">{d.name}</p>
+      </div>
+      <div className="grid grid-cols-2 gap-3 mb-3">
+        <div>
+          <p className="text-gray-600 text-sm">المبلغ</p>
+          <p className="text-red-600 font-bold">{Number(d.amount).toLocaleString()} دينار</p>
         </div>
+        <div>
+          <p className="text-gray-600 text-sm">التاريخ</p>
+          <p className="text-gray-800 font-semibold">{new Date(d.date).toLocaleDateString("en-GB")}</p>
+        </div>
+      </div>
+      <div className="flex gap-2">
+        <button
+          onClick={() => handleEdit(d)}
+          className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded font-semibold transition"
+        >
+         ✏️ تعديل
+        </button>
+        <button
+          onClick={() => handleDelete(d._id)}
+          className="flex-1 bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded font-semibold transition"
+        >
+ 🗑️         حذف
+        </button>
+      </div>
+    </div>
+  ))}
+</div>
+
 
         {debtors.length === 0 && (
           <div className="bg-white rounded-lg shadow-lg p-8 text-center">

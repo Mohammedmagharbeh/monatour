@@ -555,13 +555,13 @@ const Creditors = () => {
                         onClick={() => handleEdit(d)}
                         className="bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded font-semibold transition w-full"
                       >
-                        تعديل
+                       ✏️ تعديل
                       </button>
                       <button
                         onClick={() => handleDelete(d._id)}
                         className="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded font-semibold transition w-full"
                       >
-                        حذف
+ 🗑️                       حذف
                       </button>
                     </td>
                   </tr>
@@ -594,13 +594,13 @@ const Creditors = () => {
                   onClick={() => handleEdit(d)}
                   className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded font-semibold transition"
                 >
-                  تعديل
+                 ✏️ تعديل
                 </button>
                 <button
                   onClick={() => handleDelete(d._id)}
                   className="flex-1 bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded font-semibold transition"
                 >
-                  حذف
+ 🗑️                 حذف
                 </button>
               </div>
             </div>

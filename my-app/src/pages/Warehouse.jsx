@@ -60,7 +60,7 @@ const Warehouse = () => {
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-600 mb-2">
-            جرد المستودع الرئيسي
+            جرد المستودع الرئيسي🏭
           </h1>
           <div className="h-1 w-20 bg-gradient-to-r from-blue-500 to-teal-500 rounded"></div>
         </div>
@@ -147,13 +147,13 @@ const Warehouse = () => {
                       onClick={() => handleEdit(item)}
                       className="bg-yellow-400 hover:bg-yellow-500 text-black px-3 py-1 rounded-lg text-sm font-semibold transition-colors duration-150"
                     >
-                      تعديل
+                     ✏️ تعديل
                     </button>
                     <button
                       onClick={() => handleDelete(item._id)}
                       className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-sm font-semibold transition-colors duration-150"
                     >
-                      حذف
+ 🗑️                     حذف
                     </button>
                   </td>
                 </tr>
@@ -188,13 +188,13 @@ const Warehouse = () => {
                   onClick={() => handleEdit(item)}
                   className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black py-2 rounded-lg font-semibold transition-colors duration-150"
                 >
-                  تعديل
+                 ✏️ تعديل
                 </button>
                 <button
                   onClick={() => handleDelete(item._id)}
                   className="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg font-semibold transition-colors duration-150"
                 >
-                  حذف
+ 🗑️                 حذف
                 </button>
               </div>
             </div>
