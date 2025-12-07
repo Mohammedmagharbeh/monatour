@@ -373,13 +373,13 @@ const Shop = () => {
                       onClick={() => handleEdit(item)}
                       className="bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold px-3 py-1 rounded-lg transition"
                     >
-                      تعديل
+                    ✏️  تعديل
                     </button>
                     <button
                       onClick={() => handleDelete(item._id)}
                       className="bg-red-500 hover:bg-red-600 text-white font-bold px-3 py-1 rounded-lg transition"
                     >
-                      حذف
+  🗑️                    حذف
                     </button>
                   </td>
                 </tr>
@@ -416,13 +416,13 @@ const Shop = () => {
                   onClick={() => handleEdit(item)}
                   className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-2 rounded-lg transition"
                 >
-                  تعديل
+                 ✏️ تعديل
                 </button>
                 <button
                   onClick={() => handleDelete(item._id)}
                   className="flex-1 bg-red-500 hover:bg-red-600 text-white font-bold py-2 rounded-lg transition"
                 >
-                  حذف
+ 🗑️                 حذف
                 </button>
               </div>
             </div>
