@@ -1,177 +1,194 @@
-// import React, { useState, useEffect } from "react";
-// import axios from "axios";
+"use client"
 
-// const Creditors = () => {
-//   const [creditors, setCreditors] = useState([]);
-
-//   const fetchCreditors = async () => {
-//     const res = await axios.get("https://monatour-3.onrender.com/api/debt");
-//     // فلترة الدائنين فقط
-//     setCreditors(res.data.filter(item => item.type === "credit"));
-//   };
-
-//   useEffect(() => {
-//     fetchCreditors();
-//   }, []);
-
-//   return (
-//     <div className="max-w-5xl mx-auto p-4 sm:p-6">
-//       <h1 className="text-2xl sm:text-3xl font-bold mb-4">الدائنين</h1>
-//       <div className="overflow-x-auto">
-//         <table className="w-full text-right border-collapse border border-gray-300">
-//           <thead>
-//             <tr className="bg-gray-100">
-//               <th className="border p-2">الاسم</th>
-//               <th className="border p-2">المبلغ</th>
-//               <th className="border p-2">التاريخ</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {creditors.map(d => (
-//               <tr key={d._id}>
-//                 <td className="border p-2">{d.name}</td>
-//                 <td className="border p-2">{d.amount}</td>
-//                 <td className="border p-2">{new Date(d.date).toLocaleDateString()}</td>
-//               </tr>
-//             ))}
-//           </tbody>
-//         </table>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Creditors;
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react"
+import axios from "axios"
 
 const Creditors = () => {
-  const [creditors, setCreditors] = useState([]);
-  const [form, setForm] = useState({ name: "", amount: "", date: "" });
-  const [editingId, setEditingId] = useState(null);
+  const [creditors, setCreditors] = useState([])
+  const [form, setForm] = useState({ name: "", amount: "", date: "" })
+  const [editingId, setEditingId] = useState(null)
 
   const fetchCreditors = async () => {
-    const res = await axios.get("https://monatour-3.onrender.com/api/debt");
-    setCreditors(res.data.filter(item => item.type === "credit"));
-  };
+    const res = await axios.get("https://monatour-3.onrender.com/api/debt")
+    setCreditors(res.data.filter((item) => item.type === "credit"))
+  }
 
   useEffect(() => {
-    fetchCreditors();
-  }, []);
+    fetchCreditors()
+  }, [])
 
-  const totalAmount = creditors.reduce((sum, item) => sum + Number(item.amount), 0);
+  const totalAmount = creditors.reduce((sum, item) => sum + Number(item.amount), 0)
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (editingId) {
       await axios.put(`https://monatour-3.onrender.com/api/debt/${editingId}`, {
         ...form,
-        type: "credit"
-      });
+        type: "credit",
+      })
     } else {
       await axios.post("https://monatour-3.onrender.com/api/debt", {
         ...form,
-        type: "credit"
-      });
+        type: "credit",
+      })
     }
-    setForm({ name: "", amount: "", date: "" });
-    setEditingId(null);
-    fetchCreditors();
-  };
+    setForm({ name: "", amount: "", date: "" })
+    setEditingId(null)
+    fetchCreditors()
+  }
 
   const handleEdit = (item) => {
     setForm({
       name: item.name,
       amount: item.amount,
-      date: item.date.split("T")[0]
-    });
-    setEditingId(item._id);
-  };
+      date: item.date.split("T")[0],
+    })
+    setEditingId(item._id)
+  }
 
   const handleDelete = async (id) => {
     if (window.confirm("هل تريد حذف هذا العنصر؟")) {
-      await axios.delete(`https://monatour-3.onrender.com/api/debt/${id}`);
-      fetchCreditors();
+      await axios.delete(`https://monatour-3.onrender.com/api/debt/${id}`)
+      fetchCreditors()
     }
-  };
+  }
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    })
+  }
 
   return (
-    <div className="max-w-5xl mx-auto p-4 sm:p-6">
-      <h1 className="text-2xl sm:text-3xl font-bold mb-4">الدائنين</h1>
-      <p className="mb-4 font-semibold">المجموع الكلي للدائنين: {totalAmount}</p>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 p-4 sm:p-6">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-2">الدائنين</h1>
+          <p className="text-gray-600">إدارة حسابات الدائنين والمستحقات</p>
+        </div>
 
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-4 sm:p-6 shadow rounded mb-6 flex flex-col sm:flex-row sm:items-end gap-4"
-      >
-        <input
-          type="text"
-          placeholder="اسم الطرف"
-          value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-          className="border p-2 rounded w-full sm:w-1/3"
-          required
-        />
+        {/* Total Amount Card */}
+        <div className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg p-6 sm:p-8 mb-8 shadow-lg">
+          <p className="text-sm sm:text-base opacity-90 mb-2">المجموع الكلي للدائنين</p>
+          <p className="text-3xl sm:text-4xl font-bold">{totalAmount.toLocaleString()} دينار</p>
+        </div>
 
-        <input
-          type="number"
-          placeholder="المبلغ"
-          value={form.amount}
-          onChange={(e) => setForm({ ...form, amount: e.target.value })}
-          className="border p-2 rounded w-full sm:w-1/3"
-          required
-        />
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-lg p-6 sm:p-8 mb-8">
+          <h2 className="text-xl font-bold text-gray-800 mb-6">{editingId ? "تعديل الدائن" : "إضافة دائن جديد"}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <input
+              type="text"
+              placeholder="اسم الطرف"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              className="border-2 border-gray-300 p-3 rounded-lg focus:border-blue-500 focus:outline-none transition"
+              required
+            />
 
-        <input
-          type="date"
-          value={form.date}
-          onChange={(e) => setForm({ ...form, date: e.target.value })}
-          className="border p-2 rounded w-full sm:w-1/3"
-          required
-        />
+            <input
+              type="number"
+              placeholder="المبلغ"
+              value={form.amount}
+              onChange={(e) => setForm({ ...form, amount: e.target.value })}
+              className="border-2 border-gray-300 p-3 rounded-lg focus:border-blue-500 focus:outline-none transition"
+              required
+            />
 
-        <button className="bg-green-500 text-white px-4 py-2 rounded w-full sm:w-auto">
-          {editingId ? "تحديث" : "إضافة"}
-        </button>
-      </form>
+            <input
+              type="date"
+              value={form.date}
+              onChange={(e) => setForm({ ...form, date: e.target.value })}
+              className="border-2 border-gray-300 p-3 rounded-lg focus:border-blue-500 focus:outline-none transition"
+              required
+            />
 
-      <div className="overflow-x-auto">
-        <table className="w-full text-right border-collapse border border-gray-300">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="border p-2">الاسم</th>
-              <th className="border p-2">المبلغ</th>
-              <th className="border p-2">التاريخ</th>
-              <th className="border p-2">إجراءات</th>
-            </tr>
-          </thead>
-          <tbody>
-            {creditors.map((d) => (
-              <tr key={d._id}>
-                <td className="border p-2">{d.name}</td>
-                <td className="border p-2">{d.amount}</td>
-                <td className="border p-2">{new Date(d.date).toLocaleDateString()}</td>
-                <td className="border p-2 flex flex-col sm:flex-row gap-2">
-                  <button
-                    onClick={() => handleEdit(d)}
-                    className="bg-yellow-400 px-2 py-1 rounded"
-                  >
-                    تعديل
-                  </button>
-                  <button
-                    onClick={() => handleDelete(d._id)}
-                    className="bg-red-500 text-white px-2 py-1 rounded"
-                  >
-                    حذف
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+            <button className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 py-3 rounded-lg font-semibold hover:shadow-lg transition transform hover:scale-105">
+              {editingId ? "تحديث" : "إضافة"}
+            </button>
+          </div>
+        </form>
+
+        {/* Desktop Table */}
+        <div className="hidden sm:block bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white">
+                  <th className="p-4 text-right">الاسم</th>
+                  <th className="p-4 text-right">المبلغ</th>
+                  <th className="p-4 text-right">التاريخ</th>
+                  <th className="p-4 text-right">إجراءات</th>
+                </tr>
+              </thead>
+              <tbody>
+                {creditors.map((d, index) => (
+                  <tr key={d._id} className={index % 2 === 0 ? "bg-white" : "bg-gray-50 hover:bg-gray-100"}>
+                    <td className="p-4 text-gray-800">{d.name}</td>
+                    <td className="p-4 text-gray-800 font-semibold">{Number(d.amount).toLocaleString()} دينار</td>
+                    <td className="p-4 text-gray-600">{formatDate(d.date)}</td>
+                    <td className="p-4 flex gap-2">
+                      <button
+                        onClick={() => handleEdit(d)}
+                        className="bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-1 rounded font-semibold transition transform hover:scale-105"
+                      >
+                        تعديل
+                      </button>
+                      <button
+                        onClick={() => handleDelete(d._id)}
+                        className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-semibold transition transform hover:scale-105"
+                      >
+                        حذف
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Mobile Cards */}
+        <div className="sm:hidden space-y-4">
+          {creditors.map((d) => (
+            <div key={d._id} className="bg-white rounded-lg shadow-md p-4 border-r-4 border-blue-500">
+              <div className="mb-3">
+                <p className="text-gray-600 text-sm">الاسم</p>
+                <p className="text-gray-800 font-bold text-lg">{d.name}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 mb-3">
+                <div>
+                  <p className="text-gray-600 text-sm">المبلغ</p>
+                  <p className="text-blue-600 font-bold">{Number(d.amount).toLocaleString()} دينار</p>
+                </div>
+                <div>
+                  <p className="text-gray-600 text-sm">التاريخ</p>
+                  <p className="text-gray-800 font-semibold">{formatDate(d.date)}</p>
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => handleEdit(d)}
+                  className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-3 py-2 rounded font-semibold transition"
+                >
+                  تعديل
+                </button>
+                <button
+                  onClick={() => handleDelete(d._id)}
+                  className="flex-1 bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded font-semibold transition"
+                >
+                  حذف
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Creditors;
+export default Creditors
