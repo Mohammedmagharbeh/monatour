@@ -235,7 +235,7 @@ const Shop = () => {
   const [editingId, setEditingId] = useState(null)
 
   const fetchItems = async () => {
-    const res = await axios.get("https://monatour-3.onrender.com/api/shop")
+    const res = await axios.get("https://monatour-ckd4.onrender.com/api/shop")
     setItems(res.data)
   }
 
@@ -253,9 +253,9 @@ const Shop = () => {
     }
 
     if (editingId) {
-      await axios.put(`https://monatour-3.onrender.com/api/shop/${editingId}`, formattedForm)
+      await axios.put(`https://monatour-ckd4.onrender.com/api/shop/${editingId}`, formattedForm)
     } else {
-      await axios.post("https://monatour-3.onrender.com/api/shop", formattedForm)
+      await axios.post("https://monatour-ckd4.onrender.com/api/shop", formattedForm)
     }
 
     setForm({ name: "", quantity: "", price: "" })
@@ -274,7 +274,7 @@ const Shop = () => {
 
   const handleDelete = async (id) => {
     if (window.confirm("هل تريد حذف هذا العنصر؟")) {
-      await axios.delete(`https://monatour-3.onrender.com/api/shop/${id}`)
+      await axios.delete(`https://monatour-ckd4.onrender.com/api/shop/${id}`)
       fetchItems()
     }
   }

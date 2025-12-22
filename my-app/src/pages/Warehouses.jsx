@@ -12,7 +12,7 @@ const Warehouses = () => {
   const fetchItems = async () => {
     setLoading(true)
     try {
-      const res = await axios.get("https://monatour-3.onrender.com/api/warehouse2")
+      const res = await axios.get("https://monatour-ckd4.onrender.com/api/warehouse2")
       setItems(res.data)
     } catch (error) {
       console.error("خطأ في جلب البيانات:", error)
@@ -36,9 +36,9 @@ const Warehouses = () => {
 
     try {
       if (editingId) {
-        await axios.put(`https://monatour-3.onrender.com/api/warehouse2/${editingId}`, formattedForm)
+        await axios.put(`https://monatour-ckd4.onrender.com/api/warehouse2/${editingId}`, formattedForm)
       } else {
-        await axios.post("https://monatour-3.onrender.com/api/warehouse2", formattedForm)
+        await axios.post("https://monatour-ckd4.onrender.com/api/warehouse2", formattedForm)
       }
 
       setForm({ name: "", quantity: "", price: "" })
@@ -62,7 +62,7 @@ const Warehouses = () => {
   const handleDelete = async (id) => {
     if (window.confirm("هل تريد حذف هذا العنصر؟")) {
       try {
-        await axios.delete(`https://monatour-3.onrender.com/api/warehouse2/${id}`)
+        await axios.delete(`https://monatour-ckd4.onrender.com/api/warehouse2/${id}`)
         fetchItems()
       } catch (error) {
         console.error("خطأ في حذف العنصر:", error)

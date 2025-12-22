@@ -218,7 +218,7 @@ const Login = ({ setIsLoggedIn }) => {
     setLoading(true)
 
     try {
-      const res = await axios.post("https://monatour-3.onrender.com/auth/login", {
+      const res = await axios.post("https://monatour-ckd4.onrender.com/auth/login", {
         username,
         password,
       })

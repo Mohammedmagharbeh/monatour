@@ -9,7 +9,7 @@ const Warehouse = () => {
   const [editingId, setEditingId] = useState(null)
 
   const fetchItems = async () => {
-    const res = await axios.get("https://monatour-3.onrender.com/api/warehouse")
+    const res = await axios.get("https://monatour-ckd4.onrender.com/api/warehouse")
     setItems(res.data)
   }
 
@@ -27,9 +27,9 @@ const Warehouse = () => {
     }
 
     if (editingId) {
-      await axios.put(`https://monatour-3.onrender.com/api/warehouse/${editingId}`, formattedForm)
+      await axios.put(`https://monatour-ckd4.onrender.com/api/warehouse/${editingId}`, formattedForm)
     } else {
-      await axios.post("https://monatour-3.onrender.com/api/warehouse", formattedForm)
+      await axios.post("https://monatour-ckd4.onrender.com/api/warehouse", formattedForm)
     }
 
     setForm({ name: "", quantity: "", price: "" })
@@ -48,7 +48,7 @@ const Warehouse = () => {
 
   const handleDelete = async (id) => {
     if (window.confirm("هل تريد حذف هذا العنصر؟")) {
-      await axios.delete(`https://monatour-3.onrender.com/api/warehouse/${id}`)
+      await axios.delete(`https://monatour-ckd4.onrender.com/api/warehouse/${id}`)
       fetchItems()
     }
   }

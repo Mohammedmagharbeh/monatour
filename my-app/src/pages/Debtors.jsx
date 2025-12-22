@@ -9,7 +9,7 @@ const Debtors = () => {
   const [editingId, setEditingId] = useState(null);
 
   const fetchDebtors = async () => {
-    const res = await axios.get("https://monatour-3.onrender.com/api/debt");
+    const res = await axios.get("https://monatour-ckd4.onrender.com/api/debt");
     setDebtors(res.data.filter((item) => item.type === "debit"));
   };
 
@@ -25,12 +25,12 @@ const Debtors = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (editingId) {
-      await axios.put(`https://monatour-3.onrender.com/api/debt/${editingId}`, {
+      await axios.put(`https://monatour-ckd4.onrender.com/api/debt/${editingId}`, {
         ...form,
         type: "debit",
       });
     } else {
-      await axios.post("https://monatour-3.onrender.com/api/debt", {
+      await axios.post("https://monatour-ckd4.onrender.com/api/debt", {
         ...form,
         type: "debit",
       });
@@ -51,7 +51,7 @@ const Debtors = () => {
 
   const handleDelete = async (id) => {
     if (window.confirm("هل تريد حذف هذا العنصر؟")) {
-      await axios.delete(`https://monatour-3.onrender.com/api/debt/${id}`);
+      await axios.delete(`https://monatour-ckd4.onrender.com/api/debt/${id}`);
       fetchDebtors();
     }
   };
